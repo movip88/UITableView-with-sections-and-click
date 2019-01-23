@@ -23,10 +23,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let myCell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        let myCell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! customTableViewCell
+        
         let item:Item = categorias[indexPath.section].devolverItems()[indexPath.row]
-        myCell.imageView?.image = item.devolverImagen()
-        myCell.textLabel?.text = String(item.devolverDinero())
+        myCell.imagen?.image = item.devolverImagen()
+        myCell.etiqueta?.text = String(item.devolverDinero())
         return myCell
     }
     
@@ -39,7 +40,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         vc.selectetItem = categorias[indexPath.section].devolverItems()[indexPath.row]
 
-        self.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBOutlet weak var tableView: UITableView!
